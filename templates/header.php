@@ -8,6 +8,11 @@
         .brand-text{
             color: #14a85c !important;
         }
+        form{
+            max-width: 660px;
+            margin: 20px auto;
+            padding: 20px;
+        }
     </style>
 </head>
 <body class="grey lighten-4">
