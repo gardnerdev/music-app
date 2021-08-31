@@ -1,16 +1,53 @@
 <?php
     # checking if submit is initialized 
     if(isset($_POST['submit'])){
-        echo htmlspecialchars($_POST['file-name']); # preventing XSS attacks for rendering as html entities
-        echo htmlspecialchars($_POST['title']);
-        echo htmlspecialchars($_POST['isrc-cide']);
-        echo htmlspecialchars($_POST['composer']);
-        echo htmlspecialchars($_POST['author']);
-        echo htmlspecialchars($_POST['description-author']);
-        echo htmlspecialchars($_POST['duration']);
-    }
-?>
+        // echo htmlspecialchars($_POST['file-name']); # preventing XSS attacks for rendering as html entities 
+        // validation
+        if (empty($_POST["file-name"])){
+            echo 'An file name is required ';
+        } else {
+            echo htmlspecialchars($_POST['file-name']);
+        }
 
+        if (empty($_POST["title"])){
+            echo 'An title is required <br />';
+        } else {
+            echo htmlspecialchars($_POST['title']);
+        }
+
+        if (empty($_POST["isrc-code"])){
+            echo 'An isrc code is required <br />';
+        } else {
+            echo htmlspecialchars($_POST['isrc-code']);
+        }
+
+        if (empty($_POST["composer"])){
+            echo 'An composer is required <br />';
+        } else {
+            echo htmlspecialchars($_POST['composer']);
+        }
+
+        if (empty($_POST["author"])){
+            echo 'An title is required <br />';
+        } else {
+            echo htmlspecialchars($_POST['author']);
+        }
+
+        if (empty($_POST["description-author"])){
+            echo 'An author of description is required <br />';
+        } else {
+            echo htmlspecialchars($_POST['description-author']);
+        }
+
+        if (empty($_POST["duration"])){
+            echo 'A duration is required <br />';
+        } else {
+            echo htmlspecialchars($_POST['duration']);
+        }
+
+    }       # end of post check
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -23,7 +60,7 @@
             <label>Title: </label>
             <input type="text" name="title">
             <label>ISRC code: </label>
-            <input type="text" name="isrc-cide">
+            <input type="text" name="isrc-code">
             <label>Composer: </label>
             <input type="text" name="composer">
             <label>Author: </label>
