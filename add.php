@@ -1,4 +1,6 @@
 <?php
+    
+    include('config/db_connect.php');
 
     $fileName = $title = $isrcCode = $composer = $author = $descriptionAuthor = $duration = '';
     $errors = array('fileName' => '', 'title' => '', 'isrcCode' => '','composer' => '', 'author' => '', 'descriptionAuthor' => '', 'duration' => '');
@@ -54,8 +56,28 @@
             $duration=$_POST['duration'];
         }
         if (array_filter($errors)){
-        } else{
-            header('Location: index.php');
+            
+        } else {
+            // protecting from sql injection
+            $fileName = mysqli_real_escape_string($conn, $_POST['fileName']);
+            $title = mysqli_real_escape_string($conn, $_POST['title']);
+            $isrcCode = mysqli_real_escape_string($conn, $_POST['isrcCode']);
+            $composer = mysqli_real_escape_string($conn, $_POST['composer']);
+            $author = mysqli_real_escape_string($conn, $_POST['author']);
+            $descriptionAuthor = mysqli_real_escape_string($conn, $_POST['descriptionAuthor']);
+            // $duration  = intval(mysqli_real_escape_string($conn, $POST['duration']));
+
+            $sql = "INSERT INTO songs(`file_name`,title,isrc_code,composer,author,description_author,duration) VALUES ('$fileName','$title','$isrcCode','$composer','$author','$descriptionAuthor', $duration)";
+            
+            // save in db and check
+            if(mysqli_query($conn, $sql)){
+                //success
+                 // form is valid
+                header('Location: index.php');
+            } else {
+                echo 'query error: ' . mysqli_error($conn);
+            }
+
         }
     }      
 ?>

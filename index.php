@@ -1,13 +1,6 @@
 <?php
-   
-    // connect to database
-    $conn = mysqli_connect('localhost', 'user', 'aplikacjeinternetowe', 'songs_portal');
-
-
-    // check connection
-    if(!$conn){
-        echo 'Connection error: ' . mysqli_connect_error();
-    }
+    
+    include('config/db_connect.php');
 
     // write query for all songs
     $sql = 'SELECT * FROM songs';
@@ -45,7 +38,7 @@
                             <h6><?php echo htmlspecialchars($song['title']); ?></h6>
                             <div><?php echo htmlspecialchars($song['author']); ?></div>
                             <div class="card-action right-align">
-                                <a href="#" class="brand-text">more info</a>
+                                <a href="details.php?id=<?php echo $song['id']?>" class="brand-text">more info</a>
                             </div>
                         </div>
                     </div>
