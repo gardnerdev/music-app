@@ -1,7 +1,6 @@
 <?php
    
-    define('NAME', 'Uoshi');
-    $fileName = "Tamagotchi";
+    // connect to database
 
 ?>
 
@@ -10,6 +9,7 @@
 <html lang="en">
     <?php include('templates/header.php')?>
     <?php include('templates/footer.php')?>
+    
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,14 +17,6 @@
     <title>Music songs</title>
 </head>
 <body>
-        <h1><?php echo 'hello, music app'; ?></h1>
-        <div>
-            <?php
-            echo $fileName;
-            ?>
-        </div>
-        <div>
-            <?php echo NAME ?>
-        </div>
+        <h1><?php echo 'hello, music songs portal'; ?></h1>
 </body>
 </html>
