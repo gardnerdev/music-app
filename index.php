@@ -37,7 +37,7 @@
 
     <div class="container">
         <div class="row">
-            <?php foreach($songs as $song){ ?>
+            <?php foreach($songs as $song): ?>
 
                 <div class="col s6 md3 ">
                     <div class="card z-depth-0">
@@ -51,7 +51,7 @@
                     </div>
                 </div>
 
-            <?php } ?>
+            <?php endforeach; ?>
         
         </div>
     </div>
