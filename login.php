@@ -2,7 +2,6 @@
     include_once 'templates/header.php';
 ?>
 
-
     <section class="signup-form">
     <section class="container grey-text"></section>
         <h4 class="center">Log In</h4>
@@ -14,8 +13,16 @@
             </div>
         </form>
     </section>
-
-
+    <?php
+        if (isset($_GET["error"])){
+            if($_GET["error"] == "emptyinput"){
+                echo "<p>Fill in all fields!</p>";
+            }
+            else if ($_GET["error"] == "wronglogin") {
+                echo "<p>Incorrect login</p>";
+            }
+        }
+        ?>
 <?php 
     include_once 'templates/footer.php';
 ?>

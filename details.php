@@ -50,10 +50,11 @@
             <p>Isrc code: <?php echo htmlspecialchars($song['isrc_code']); ?></p>
             <p>Composer: <?php echo htmlspecialchars($song['composer']); ?></p>
             <p>Description author: <?php echo htmlspecialchars($song['description_author']); ?></p>
-            <p>Duration (in seconds): <?php echo htmlspecialchars($song['duration']); ?></p>
+            <p>Duration (in seconds): <?php echo htmlspecialchars($song['duration']); 
+            ?></p>
 
 
-
+        
 
             <!-- EDIT FORM -->
         <form action="update.php?id=<?=$song['id']?>" method="POST">
