@@ -3,6 +3,7 @@
 ?>
 
     <section class="signup-form">
+    <link rel="stylesheet" type="text/css" href="templates/style.css">
     <section class="container grey-text"></section>
         <h4 class="center">Log In</h4>
         <form action="includes/login.inc.php" method="post">

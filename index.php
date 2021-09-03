@@ -22,11 +22,17 @@
 
 <!DOCTYPE html>
 <html lang="en">
+<link rel="stylesheet" type="text/css" href="templates/style.css">
     <?php include('templates/header.php')?>
-
+    <?php
+        if (isset($_SESSION["useruid"])){
+            echo "<br>";
+            echo "<p>Hello there, " . $_SESSION["useruid"] . "</p>";
+            echo "<br>";
+        }
+    ?>
     <h4 class="center gray-text">Songs
     </h4>
-
     <div class="container">
         <div class="row">
             <?php foreach($songs as $song): ?>

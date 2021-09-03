@@ -53,19 +53,29 @@
             <p>Duration (in seconds): <?php echo htmlspecialchars($song['duration']); 
             ?></p>
 
-
-        
-
             <!-- EDIT FORM -->
+            
         <form action="update.php?id=<?=$song['id']?>" method="POST">
             <input type="hidden" name="id" value="<?php echo $song['id'] ?>">
-            <input type="submit" name="edit" value="Edit" class="btn brand z-depth-0">
+            <?php
+                if (isset($_SESSION["useruid"])) {
+                   echo "<input type='submit' name='edit' value='Edit' class='btn brand z-depth-0'>";
+                }else{
+                    echo "<a href='login.php' class='btn brand z-depth-0'>Edit</a>";
+                }
+            ?>
         </form>
 
             <!-- DELETE FORM -->
         <form action="details.php" method="POST">
             <input type="hidden" name="id_to_delete" value="<?php echo $song['id'] ?>">
-            <input type="submit" name="delete" value="Delete" class="btn brand z-depth-0">
+            <?php
+                if (isset($_SESSION["useruid"])) {
+                   echo "<input type='submit' name='delete' value='Delete' class='btn brand z-depth-0'>";
+                }else{
+                    echo "<a href='login.php' class='btn brand z-depth-0'>Delete</a>";
+                }
+            ?>
         </form>
 
 
