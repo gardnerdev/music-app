@@ -57,7 +57,7 @@
 
             <!-- EDIT FORM -->
         <form action="update.php?id=<?=$song['id']?>" method="POST">
-            <input type="hidden" name="id_to_edit" value="<?php echo $song['id'] ?>">
+            <input type="hidden" name="id" value="<?php echo $song['id'] ?>">
             <input type="submit" name="edit" value="Edit" class="btn brand z-depth-0">
         </form>
 

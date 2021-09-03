@@ -34,6 +34,10 @@ if (isset($_GET['id'])){
     $author = $_POST['author'];
     $descriptionAuthor = $_POST['descriptionAuthor'];
     $duration = $_POST['duration'];
+
+
+    print_r($author);
+    print_r($duration);
     $errors = array('fileName' => '', 'title' => '', 'isrcCode' => '','composer' => '', 'author' => '', 'descriptionAuthor' => '', 'duration' => '');
 
     # checking if submit is initialized 
@@ -81,26 +85,16 @@ if (isset($_GET['id'])){
             $descriptionAuthor=$_POST['descriptionAuthor'];
         }
         if (empty($_POST['duration'])){
-            $errors['duration']='A duration is required <br />';
+            $errors['duration']='A duration is required.Cannot be 0. <br />';
         }
         else{
             $duration=$_POST['duration'];
         }
-
         if (array_filter($errors)){
-
         }else {
-            // protecting from sql injection
-            $fileName = mysqli_real_escape_string($conn, $_POST['fileName']);
-            $title = mysqli_real_escape_string($conn, $_POST['title']);
-            $isrcCode = mysqli_real_escape_string($conn, $_POST['isrcCode']);
-            $composer = mysqli_real_escape_string($conn, $_POST['composer']);
-            $author = mysqli_real_escape_string($conn, $_POST['author']);
-            $descriptionAuthor = mysqli_real_escape_string($conn, $_POST['descriptionAuthor']);
-            $duration  = intval(mysqli_real_escape_string($conn, $POST['duration']));
-
-            $sql = "INSERT INTO songs(`file_name`,title,isrc_code,composer,author,description_author,duration) VALUES ('$fileName','$title','$isrcCode','$composer','$author','$descriptionAuthor', $duration)";
-            
+            $id = $_POST['id'];
+            $sql = "UPDATE songs SET `file_name`='$fileName', title='$title', isrc_code='$isrcCode',composer='$composer',
+            author='$author', description_author='$descriptionAuthor', duration='$duration' WHERE id=$id";
             // save in db and check
             if(mysqli_query($conn, $sql)){
                 //success
@@ -146,6 +140,7 @@ if (isset($_GET['id'])){
             <label>Duration (in seconds): </label>
             <input type="number" name="duration" value="<?php echo htmlspecialchars($song['duration']) ?>">
             <div class="red-text"><?php echo $errors['duration']; ?></div>
+            <input type="hidden" name="id" value="<?php echo $song['id'] ?>">
             <div class="center">
                 <input type="submit" name="update" value="update" class="btn brand z-depth-0">
             </div>
