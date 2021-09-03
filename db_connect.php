@@ -1,10 +1,15 @@
 <?php
+    $serverName = "localhost";
+    $dBUsername = "user";
+    $dBPassword = "aplikacjeinternetowe";
+    $dBName = "songs_portal";
+
+      
     // connect to database
-    $conn = mysqli_connect('localhost', 'user', 'aplikacjeinternetowe', 'songs_portal');
+    $conn = mysqli_connect($serverName, $dBUsername, $dBPassword, $dBName);
 
 
     // check connection
     if(!$conn){
-        echo 'Connection error: ' . mysqli_connect_error();
+        die('Connection error: ' . mysqli_connect_error());
     }
-?>

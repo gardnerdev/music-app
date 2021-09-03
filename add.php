@@ -1,6 +1,6 @@
 <?php
     
-    include('config/db_connect.php');
+    include('db_connect.php');
 
     $fileName = $title = $isrcCode = $composer = $author = $descriptionAuthor = $duration = '';
     $errors = array('fileName' => '', 'title' => '', 'isrcCode' => '','composer' => '', 'author' => '', 'descriptionAuthor' => '', 'duration' => '');

@@ -22,6 +22,7 @@
             <ul id="nav-mobile" class="right hide-on-small-and-down">
                 <li>
                     <a href="add.php" class="btn brand z-depth-0">Add a song</a>
+                    <a href="login.php" class="btn brand z-depth-0">Log in</a>
                     <a href="signup.php" class="btn brand z-depth-0">Sign up</a>
                 </li>
             </ul>
