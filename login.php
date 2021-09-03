@@ -20,7 +20,7 @@
                 echo "<p>Fill in all fields!</p>";
             }
             else if ($_GET["error"] == "wronglogin") {
-                echo "<p>Incorrect login</p>";
+                echo "<p>Incorrect login or password</p>";
             }
         }
         ?>
