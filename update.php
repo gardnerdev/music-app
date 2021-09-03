@@ -1,12 +1,43 @@
 <?php
+ 
+// check GET requet id param
+if (isset($_GET['id'])){    
     
-    include('config/db_connect.php');
+    include "db_connect.php";
 
-    $fileName = $title = $isrcCode = $composer = $author = $descriptionAuthor = $duration = '';
+    $id = mysqli_real_escape_string($conn, $_GET['id']);
+
+    // make sql
+    $sql = "SELECT * FROM songs WHERE id = $id";
+
+    // get the query result
+    $result = mysqli_query($conn, $sql);
+
+
+    if (mysqli_num_rows($result)> 0){
+        // fetch result in array format
+        $song = mysqli_fetch_assoc($result);
+        mysqli_free_result($result);
+        mysqli_close($conn);
+    }else {
+        header("Location: add.php");
+    }
+
+}else if(isset($_POST['update'])){
+
+    include "db_connect.php";
+
+    $fileName = $_POST['fileName'];
+    $title = $_POST['title'];
+    $isrcCode = $_POST['isrcCode'];
+    $composer = $_POST['composer'];
+    $author = $_POST['author'];
+    $descriptionAuthor = $_POST['descriptionAuthor'];
+    $duration = $_POST['duration'];
     $errors = array('fileName' => '', 'title' => '', 'isrcCode' => '','composer' => '', 'author' => '', 'descriptionAuthor' => '', 'duration' => '');
 
     # checking if submit is initialized 
-    if(isset($_POST['submit'])){
+    if(isset($_POST['update'])){
         // echo htmlspecialchars($_POST['fileName']); # preventing XSS attacks for rendering as html entities 
         // validation
         if (empty($_POST['fileName'])){
@@ -55,9 +86,10 @@
         else{
             $duration=$_POST['duration'];
         }
+
         if (array_filter($errors)){
-            
-        } else {
+
+        }else {
             // protecting from sql injection
             $fileName = mysqli_real_escape_string($conn, $_POST['fileName']);
             $title = mysqli_real_escape_string($conn, $_POST['title']);
@@ -79,7 +111,11 @@
             }
 
         }
-    }      
+    }
+
+}else {
+    header("Location: add.php");
+}
 ?>
 
 
@@ -87,31 +123,31 @@
 <html lang="en">
     <?php include('templates/header.php'); ?>
     <section class="container grey-text"></section>
-        <h4 class="center">Add a song</h4>
-        <form class="white" action="add.php" method="POST">
+        <h4 class="center">Update a song</h4>
+        <form class="white" action="update.php" method="POST">
             <label>File name: </label>
-            <input type="text" name="fileName" value="<?php echo htmlspecialchars($fileName) ?>">
+            <input type="text" name="fileName" value="<?php echo htmlspecialchars($song['file_name']) ?>">
             <div class="red-text"><?php echo $errors['fileName']; ?></div>
             <label>Title: </label>
-            <input type="text" name="title" value="<?php echo htmlspecialchars($title) ?>">
+            <input type="text" name="title" value="<?php echo htmlspecialchars($song['title']) ?>">
             <div class="red-text"><?php echo $errors['title']; ?></div>
             <label>ISRC code: </label>
-            <input type="text" name="isrcCode" value="<?php echo htmlspecialchars($isrcCode) ?>">
+            <input type="text" name="isrcCode" value="<?php echo htmlspecialchars($song['isrc_code']) ?>">
             <div class="red-text"><?php echo $errors['isrcCode']; ?></div>
             <label>Composer: </label>
-            <input type="text" name="composer" value="<?php echo htmlspecialchars($composer) ?>">
+            <input type="text" name="composer" value="<?php echo htmlspecialchars($song['composer']) ?>">
             <div class="red-text"><?php echo $errors['composer']; ?></div>
             <label>Author: </label>
-            <input type="text" name="author" value="<?php echo htmlspecialchars($author) ?>">
+            <input type="text" name="author" value="<?php echo htmlspecialchars($song['author']) ?>">
             <div class="red-text"><?php echo $errors['author']; ?></div>
             <label>Description author: </label>
-            <input type="text" name="descriptionAuthor" value="<?php echo htmlspecialchars($descriptionAuthor) ?>">
+            <input type="text" name="descriptionAuthor" value="<?php echo htmlspecialchars($song['description_author']) ?>">
             <div class="red-text"><?php echo $errors['descriptionAuthor']; ?></div>
             <label>Duration (in seconds): </label>
-            <input type="number" name="duration" value="<?php echo htmlspecialchars($duration) ?>">
+            <input type="number" name="duration" value="<?php echo htmlspecialchars($song['duration']) ?>">
             <div class="red-text"><?php echo $errors['duration']; ?></div>
             <div class="center">
-                <input type="submit" name="submit" value="submit" class="btn brand z-depth-0">
+                <input type="submit" name="update" value="update" class="btn brand z-depth-0">
             </div>
         </form>
     </section>

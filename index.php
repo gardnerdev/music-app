@@ -1,6 +1,6 @@
 <?php
     
-    include('config/db_connect.php');
+    include('db_connect.php');
 
     // write query for all songs
     $sql = 'SELECT * FROM songs';
@@ -16,7 +16,6 @@
 
     // close connection
     mysqli_close($conn);
-
     
 ?>
 

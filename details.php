@@ -1,6 +1,6 @@
 <?php 
 
-    include('config/db_connect.php');
+    include('db_connect.php');
 
     if (isset($_POST['delete'])){
 
@@ -15,6 +15,7 @@
             echo 'query error: ' . mysqli_error($conn);
         }
     }
+
 
     // check GET requet id param
     if (isset($_GET['id'])){    
@@ -41,7 +42,7 @@
 
     <?php include('templates/header.php'); ?>
 
-    <div class="container center">
+    <div class="container center grey-text">
         <?php if($song): ?>
             <h4>Title: <?php echo htmlspecialchars($song['title']); ?></hr4>
             <p>Author: <?php echo htmlspecialchars($song['author']); ?></p>
@@ -51,6 +52,14 @@
             <p>Description author: <?php echo htmlspecialchars($song['description_author']); ?></p>
             <p>Duration (in seconds): <?php echo htmlspecialchars($song['duration']); ?></p>
 
+
+
+
+            <!-- EDIT FORM -->
+        <form action="update.php?id=<?=$song['id']?>" method="POST">
+            <input type="hidden" name="id_to_edit" value="<?php echo $song['id'] ?>">
+            <input type="submit" name="edit" value="Edit" class="btn brand z-depth-0">
+        </form>
 
             <!-- DELETE FORM -->
         <form action="details.php" method="POST">
