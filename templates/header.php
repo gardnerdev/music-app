@@ -29,6 +29,7 @@
                     <?php
                         if (isset($_SESSION["useruid"])) {
                             echo "<a href='add.php' class='btn brand z-depth-0'>Add a song</a>";
+                            echo "<a href='reports.php' class='btn brand z-depth-0'>Add a report</a>";
                             echo "<a href='includes/logout.inc.php' class='btn brand z-depth-0'>Log out</a>";
 
                         }else{
